@@ -1,20 +1,23 @@
 import java.util.Scanner;
 
 public class Main {
-
-    // Application constants (UC1 Requirement)
-    private static final String APP_NAME = "Palindrome Checker App";
-    private static final String APP_VERSION = "Version 1.0";
-
     public static void main(String[] args) {
 
-        // ===== UC1: Application Entry & Welcome Message =====
-        System.out.println("=====================================");
-        System.out.println("Welcome to " + APP_NAME);
-        System.out.println(APP_VERSION);
-        System.out.println("=====================================");
+        // ================== UC2 ==================
+        // Hardcoded string check
+        String hardcodedWord = "madam";
 
-        // ===== Continue to Palindrome Use Case =====
+        String hardcodedReversed = new StringBuilder(hardcodedWord).reverse().toString();
+
+        if (hardcodedWord.equals(hardcodedReversed)) {
+            System.out.println("UC2 Result: \"" + hardcodedWord + "\" is a Palindrome ✅");
+        } else {
+            System.out.println("UC2 Result: \"" + hardcodedWord + "\" is NOT a Palindrome ❌");
+        }
+
+        System.out.println("----------------------------------");
+
+        // ================== YOUR ORIGINAL CODE (UNCHANGED) ==================
         Scanner sc = new Scanner(System.in);
 
         System.out.print("Enter a word: ");
