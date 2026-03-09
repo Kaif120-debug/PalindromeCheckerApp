@@ -34,6 +34,6 @@ public class Main {
             System.out.println("Not a Palindrome ❌");
         }
 
-        sc.close();
+        sc.close();//commit
     }
 }
