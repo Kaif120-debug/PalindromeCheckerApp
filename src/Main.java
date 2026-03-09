@@ -9,15 +9,28 @@ public class Main {
         System.out.print("Enter a word: ");
         String input = sc.nextLine();
 
-        String reversed = "";
+        // Convert string to char array
+        char[] arr = input.toCharArray();
 
-        // Reverse string using loop
-        for (int i = input.length() - 1; i >= 0; i--) {
-            reversed = reversed + input.charAt(i);
+        int left = 0;
+        int right = arr.length - 1;
+
+        boolean isPalindrome = true;
+
+        // Two-pointer comparison
+        while (left < right) {
+
+            if (arr[left] != arr[right]) {
+                isPalindrome = false;
+                break;
+            }
+
+            left++;
+            right--;
         }
 
-        // Compare original and reversed
-        if (input.equals(reversed)) {
+        // Display result
+        if (isPalindrome) {
             System.out.println("It is a Palindrome ✅");
         } else {
             System.out.println("Not a Palindrome ❌");
