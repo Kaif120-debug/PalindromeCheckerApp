@@ -1,44 +1,42 @@
- import java.util.Scanner;
-import java.util.Stack;
-import java.util.Queue;
-import java.util.LinkedList;
+import java.util.Scanner;
+import java.util.Deque;
+import java.util.ArrayDeque;
 
-public class UseCase6PalindromeCheckerApp {
-
+public class Main {
     public static void main(String[] args) {
-
         Scanner sc = new Scanner(System.in);
-        Stack<Character> stack = new Stack<>();
-        Queue<Character> queue = new LinkedList<>();
 
-        System.out.println("======================================");
-        System.out.println("   FIFO vs LIFO PALINDROME CHECKER    ");
-        System.out.println("======================================");
+        System.out.print("Enter a word: ");
+        String input = sc.nextLine();
 
-        System.out.print("Enter a string: ");
-        String input = sc.nextLine().toLowerCase().replaceAll("\\s+", "");
+        // Remove spaces and convert to lowercase
+        String cleaned = input.replaceAll("\\s+", "").toLowerCase();
 
-        // Add characters to stack and queue
-        for (int i = 0; i < input.length(); i++) {
-            char ch = input.charAt(i);
-            stack.push(ch);
-            queue.add(ch);
+        // Create Deque
+        Deque<Character> deque = new ArrayDeque<>();
+
+        // Insert characters into deque
+        for (char c : cleaned.toCharArray()) {
+            deque.addLast(c);
         }
 
         boolean isPalindrome = true;
 
-        // Compare stack (LIFO) and queue (FIFO)
-        while (!stack.isEmpty()) {
-            if (!stack.pop().equals(queue.remove())) {
+        // Compare front and rear characters
+        while (deque.size() > 1) {
+            char front = deque.removeFirst();
+            char rear = deque.removeLast();
+
+            if (front != rear) {
                 isPalindrome = false;
                 break;
             }
         }
 
         if (isPalindrome) {
-            System.out.println("Result: It is a Palindrome");
+            System.out.println("It is a Palindrome ✅");
         } else {
-            System.out.println("Result: Not a Palindrome");
+            System.out.println("Not a Palindrome ❌");
         }
 
         sc.close();
