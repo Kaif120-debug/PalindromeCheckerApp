@@ -1,39 +1,46 @@
-import java.util.Scanner;
+ import java.util.Scanner;
+import java.util.Stack;
+import java.util.Queue;
+import java.util.LinkedList;
 
-public class Main {
+public class UseCase6PalindromeCheckerApp {
+
     public static void main(String[] args) {
 
-        // ================== UC2 ==================
-        // Hardcoded string check
-        String hardcodedWord = "madam";
-
-        String hardcodedReversed = new StringBuilder(hardcodedWord).reverse().toString();
-
-        if (hardcodedWord.equals(hardcodedReversed)) {
-            System.out.println("UC2 Result: \"" + hardcodedWord + "\" is a Palindrome ✅");
-        } else {
-            System.out.println("UC2 Result: \"" + hardcodedWord + "\" is NOT a Palindrome ❌");
-        }
-
-        System.out.println("----------------------------------");
-
-        // ================== YOUR ORIGINAL CODE (UNCHANGED) ==================
         Scanner sc = new Scanner(System.in);
+        Stack<Character> stack = new Stack<>();
+        Queue<Character> queue = new LinkedList<>();
 
-        System.out.print("Enter a word: ");
-        String input = sc.nextLine();
+        System.out.println("======================================");
+        System.out.println("   FIFO vs LIFO PALINDROME CHECKER    ");
+        System.out.println("======================================");
 
-        // Remove spaces and convert to lowercase
-        String cleaned = input.replaceAll("\\s+", "").toLowerCase();
+        System.out.print("Enter a string: ");
+        String input = sc.nextLine().toLowerCase().replaceAll("\\s+", "");
 
-        String reversed = new StringBuilder(cleaned).reverse().toString();
-
-        if (cleaned.equals(reversed)) {
-            System.out.println("It is a Palindrome ✅");
-        } else {
-            System.out.println("Not a Palindrome ❌");
+        // Add characters to stack and queue
+        for (int i = 0; i < input.length(); i++) {
+            char ch = input.charAt(i);
+            stack.push(ch);
+            queue.add(ch);
         }
 
-        sc.close();//commit
+        boolean isPalindrome = true;
+
+        // Compare stack (LIFO) and queue (FIFO)
+        while (!stack.isEmpty()) {
+            if (!stack.pop().equals(queue.remove())) {
+                isPalindrome = false;
+                break;
+            }
+        }
+
+        if (isPalindrome) {
+            System.out.println("Result: It is a Palindrome");
+        } else {
+            System.out.println("Result: Not a Palindrome");
+        }
+
+        sc.close();
     }
 }
