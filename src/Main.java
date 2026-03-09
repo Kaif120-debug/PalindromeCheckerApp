@@ -1,30 +1,6 @@
-import java.util.*;
+import java.util.Scanner;
 
 public class Main {
-
-    // Method 1: Reverse String
-    public static boolean reverseMethod(String str) {
-        String reversed = new StringBuilder(str).reverse().toString();
-        return str.equals(reversed);
-    }
-
-    // Method 2: Deque Method
-    public static boolean dequeMethod(String str) {
-
-        Deque<Character> deque = new ArrayDeque<>();
-
-        for (char c : str.toCharArray()) {
-            deque.addLast(c);
-        }
-
-        while (deque.size() > 1) {
-            if (deque.removeFirst() != deque.removeLast()) {
-                return false;
-            }
-        }
-
-        return true;
-    }
 
     public static void main(String[] args) {
 
@@ -33,26 +9,19 @@ public class Main {
         System.out.print("Enter a word: ");
         String input = sc.nextLine();
 
-        // Normalize string
-        String cleaned = input.replaceAll("\\s+", "").toLowerCase();
+        String reversed = "";
 
-        // -------- Reverse Method Timing --------
-        long start1 = System.nanoTime();
-        boolean result1 = reverseMethod(cleaned);
-        long end1 = System.nanoTime();
+        // Reverse string using loop
+        for (int i = input.length() - 1; i >= 0; i--) {
+            reversed = reversed + input.charAt(i);
+        }
 
-        // -------- Deque Method Timing --------
-        long start2 = System.nanoTime();
-        boolean result2 = dequeMethod(cleaned);
-        long end2 = System.nanoTime();
-
-        // -------- Results --------
-        System.out.println("\nResults:");
-        System.out.println("Reverse Method: " + result1);
-        System.out.println("Execution Time: " + (end1 - start1) + " ns");
-
-        System.out.println("\nDeque Method: " + result2);
-        System.out.println("Execution Time: " + (end2 - start2) + " ns");
+        // Compare original and reversed
+        if (input.equals(reversed)) {
+            System.out.println("It is a Palindrome ✅");
+        } else {
+            System.out.println("Not a Palindrome ❌");
+        }
 
         sc.close();
     }
